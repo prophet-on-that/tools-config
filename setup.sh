@@ -14,7 +14,7 @@ if [ -d "${HOME}.vim" ]; then
 fi
 
 for file in ${files[@]}; do
-  cp $file ~;
+  ln -s $file "$HOME$file"
 done
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
