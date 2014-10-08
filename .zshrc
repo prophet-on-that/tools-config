@@ -13,7 +13,7 @@ compinit
 # End of lines added by compinstall
 
 export EDITOR="vim"
-export PATH="$HOME/bin:$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$PATH"
 
 # 
 alias sudo="sudo "
@@ -32,3 +32,9 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 export GIT="git@github.com:prophet-on-that"
+
+# Otas specific
+export linux01="alex.bates@linux01.olivetree-solutions.com"
+export hlinux01="alex.bates@hlinux01.olivetree-solutions.com"
+export hlinux02="alex.bates@hlinux02.otastech.com"
+export hlinux04="alex.bates@hlinux03.olivetree-solutions.com"

@@ -43,6 +43,26 @@ syntax on
 filetype on
 colorscheme vj
 
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+set backspace=2
+set backspace=indent,eol,start
+set number
+
+" Searching
+set ignorecase
+set smartcase
+set incsearch 
+
+" Map presing space to remove current highlighting
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" No audio bells 
+  set vb t_vb=
+
 " CTRLP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
