@@ -37,7 +37,7 @@ call vundle#end()            " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Global settings 
-set wildignore+=*/tmp/*,*.so,*.bin,*.zip,*.swp,*.hi,*.o,*.dyn_*
+set wildignore+=*/tmp/*,*.so,*.bin,*.zip,*.swp,*.hi,*.o,*.dyn_*,*/dist/*
 filetype plugin indent on    
 syntax on 
 filetype on
