@@ -41,7 +41,7 @@ set wildignore+=*/tmp/*,*.so,*.bin,*.zip,*.swp,*.hi,*.o,*.dyn_*
 filetype plugin indent on    
 syntax on 
 filetype on
-colorscheme vj
+colorscheme Tomorrow-Night-Blue
 
 set expandtab
 set shiftwidth=2
@@ -49,7 +49,6 @@ set softtabstop=2
 
 set backspace=2
 set backspace=indent,eol,start
-set number
 
 " Searching
 set ignorecase
@@ -69,5 +68,5 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrpl_working_path_mode = 'ra'
 
 " CycleColor
-nmap <F5> :CycleColorPrev<CR>
-nmap <F6> :CycleColorNext<CR>
+nmap <F5> gT
+nmap <F6> gt
