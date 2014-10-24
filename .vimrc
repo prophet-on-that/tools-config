@@ -10,9 +10,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
-Plugin 'raichoo/haskell-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'CycleColor'
 Plugin 'ervandew/supertab'
