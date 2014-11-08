@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
 
-files=(.vimrc .zshrc .tmux.conf)
+files=(.vimrc .zshrc .tmux.conf .bashrc)
 
 for file in ${files[@]}; do
   if [ -f "$HOME/$file" ]; then
@@ -14,7 +14,7 @@ if [ -d "${HOME}/.vim" ]; then
 fi
 
 for file in ${files[@]}; do
-  ln -s $file "$HOME/$file"
+  ln -s "$PWD/$file" "$HOME/$file"
 done
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim

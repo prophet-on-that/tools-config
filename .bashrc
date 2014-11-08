@@ -1,16 +1,14 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-unsetopt autocd beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/alex/.zshrc'
+# .bashrc
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Source global definitions
+if [[ -f /etc/bashrc ]]; then
+	. /etc/bashrc
+fi
+
+# If not running interactively, don't do anything
+[[ "$-" != *i* ]] && return
+
+export PS1='[\u@\h:\w] \$ '
 
 export EDITOR="vim"
 export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$PATH"
@@ -23,11 +21,6 @@ alias up="cd .."
 alias less="less -R"
 alias tmux="tmux -2"
 alias gitpp="git push && git push --tags"
-
-# Prompt configuration
-autoload -U promptinit
-promptinit
-prompt redhat 
 
 GPG_TTY=$(tty)
 export GPG_TTY
