@@ -31,12 +31,12 @@ prompt redhat
 
 GPG_TTY=$(tty)
 export GPG_TTY
-
 export GIT="git@github.com:prophet-on-that"
 
-# Otas specific
-export linux01="alex.bates@linux01.olivetree-solutions.com"
-export hlinux01="alex.bates@hlinux01.olivetree-solutions.com"
-export hlinux02="alex.bates@hlinux02.otastech.com"
-export hlinux03="alex.bates@hlinux03.olivetree-solutions.com"
-export yackage="http://hlinux03.olivetree-solutions.com:4777/"
+if [[ -f "$HOME/.zshrc_private" ]]; then
+  . "$HOME/.zshrc_private"
+fi
+
+if [[ -f "$HOME/.zshrc_local" ]]; then
+  . "$HOME/.zshrc_local"
+fi

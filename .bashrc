@@ -24,12 +24,12 @@ alias gitpp="git push && git push --tags"
 
 GPG_TTY=$(tty)
 export GPG_TTY
-
 export GIT="git@github.com:prophet-on-that"
 
-# Otas specific
-export linux01="alex.bates@linux01.olivetree-solutions.com"
-export hlinux01="alex.bates@hlinux01.olivetree-solutions.com"
-export hlinux02="alex.bates@hlinux02.otastech.com"
-export hlinux03="alex.bates@hlinux03.olivetree-solutions.com"
-export yackage="http://hlinux03.olivetree-solutions.com:4777/"
+if [[ -f "$HOME/.bashrc_private" ]]; then
+  . "$HOME/.bashrc_private"
+fi
+
+if [[ -f "$HOME/.bashrc_local" ]]; then
+  . "$HOME/.bashrc_local"
+fi
