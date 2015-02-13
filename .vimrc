@@ -60,6 +60,8 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " No audio bells 
   set vb t_vb=
 
+set nocp
+
 " CTRLP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
