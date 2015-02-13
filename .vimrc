@@ -39,7 +39,6 @@ set wildignore+=*/tmp/*,*.so,*.bin,*.zip,*.swp,*.hi,*.o,*.dyn_*,*/dist/*
 filetype plugin indent on    
 syntax on 
 filetype on
-colorscheme Tomorrow-Night-Blue
 
 set expandtab
 set shiftwidth=2
