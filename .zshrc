@@ -12,7 +12,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export EDITOR="emacs"
+export EDITOR="emacs -nw"
 export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$PATH"
 
 # 

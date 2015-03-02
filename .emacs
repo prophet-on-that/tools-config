@@ -4,10 +4,11 @@
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
   )
 
-;; Instruct emacs to save backups in folder global to the user.
-(setq auto-save-file-name-transforms
-			`((".*", (concat user-emacs-directory "auto-save/") t)))
+;; Backups in emacs. Recall backups record state at the start of a session.
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves")))
+(setq backup-by-copying t)
 
+;; Tab configuration
 (setq-default indent-tabs-mode nil)
 (setq-default default-tab-width 2)
 
@@ -25,3 +26,4 @@
 (flx-ido-mode 1)
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
+
