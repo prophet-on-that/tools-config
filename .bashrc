@@ -10,7 +10,7 @@ fi
 
 export PS1='[\u@\h:\w] \$ '
 
-export EDITOR="vim"
+export EDITOR="emacs -nw"
 export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$PATH"
 
 # 
@@ -20,7 +20,11 @@ alias ls="ls --color=always"
 alias up="cd .."
 alias less="less -R"
 alias tmux="tmux -2"
+alias emacs="emacs -nw"
 alias gitpp="git push && git push --tags"
+
+export TIME="Real: %E\tUser mode: %U\tKernel mode: %S"
+alias time="/usr/bin/time"
 
 GPG_TTY=$(tty)
 export GPG_TTY
