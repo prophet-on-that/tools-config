@@ -1,0 +1,10 @@
+*.hi
+*.o
+*.bin
+*.swp
+*cabal*sandbox*
+dist
+*.prof
+*.log
+*.orig
+*~
