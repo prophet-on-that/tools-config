@@ -22,6 +22,7 @@ alias less="less -R"
 alias tmux="tmux -2"
 alias emacs="emacs -nw"
 alias gitpp="git push && git push --tags"
+alias gl="git log --all --graph --abbrev-commit --pretty=oneline --decorate | less"
 
 export TIME="Real: %E\tUser mode: %U\tKernel mode: %S"
 alias time="/usr/bin/time"
