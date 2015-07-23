@@ -11,7 +11,7 @@ fi
 export PS1='[\u@\h:\w] \$ '
 
 export EDITOR="emacs -nw"
-export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$PATH"
+export PATH="$HOME/bin:$HOME/.cabal/bin:$HOME/scripts:$HOME/.local/bin:$PATH"
 
 # 
 alias sudo="sudo "
@@ -22,7 +22,9 @@ alias less="less -R"
 alias tmux="tmux -2"
 alias emacs="emacs -nw"
 alias gitpp="git push && git push --tags"
-alias gl="git log --all --graph --abbrev-commit --pretty=oneline --decorate | less"
+alias gl="git log --all --graph --abbrev-commit --pretty=oneline --decorate --color | less"
+alias top="top -M"
+alias utop="top -u ${USER}"
 
 export TIME="Real: %E\tUser mode: %U\tKernel mode: %S"
 alias time="/usr/bin/time"

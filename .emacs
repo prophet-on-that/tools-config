@@ -43,6 +43,7 @@
 (define-key haskell-mode-map (kbd "C-c h s") 'haskell-interactive-bring)
 (define-key haskell-mode-map (kbd "C-c h d") 'haskell-mode-jump-to-def)
 (define-key haskell-mode-map (kbd "C-c h k") 'haskell-interactive-mode-clear)
+(define-key haskell-mode-map (kbd "C-c h i") 'haskell-navigate-imports)
 (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 ;; (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
 ;; (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
@@ -54,6 +55,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(case-fold-search t)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
