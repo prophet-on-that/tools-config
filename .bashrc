@@ -1,5 +1,3 @@
-# .bashrc
-
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
 	. /etc/bashrc
@@ -23,14 +21,13 @@ alias tmux="tmux -2"
 alias emacs="emacs -nw"
 alias gitpp="git push && git push --tags"
 alias gl="git log --all --graph --abbrev-commit --pretty=oneline --decorate --color | less"
-alias top="top -M"
 alias utop="top -u ${USER}"
 
 export TIME="Real: %E\tUser mode: %U\tKernel mode: %S"
 alias time="/usr/bin/time"
 
-GPG_TTY=$(tty)
-export GPG_TTY
+# GPG_TTY=$(tty)
+# export GPG_TTY
 export GIT="git@github.com:prophet-on-that"
 
 if [[ -f "$HOME/.bashrc_private" ]]; then
