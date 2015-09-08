@@ -9,3 +9,4 @@ dist
 *.orig
 *~
 .stack-work
+stack.yaml
