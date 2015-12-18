@@ -31,6 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(backup-by-copying t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
+ '(browse-url-browser-function (quote eww-browse-url))
  '(delete-old-versions t)
  '(flx-ido-mode t)
  '(haskell-process-suggest-remove-import-lines t)
@@ -40,6 +41,12 @@
  '(ido-mode (quote both) nil (ido))
  '(ido-use-faces nil)
  '(indent-tabs-mode nil)
+ '(js-curly-indent-offset 2)
+ '(js-enabled-frameworks (quote (javascript)))
+ '(js-expr-indent-offset 2)
+ '(js-indent-level 2)
+ '(js-paren-indent-offset 2)
+ '(js-square-indent-offset 2)
  '(kept-new-versions 6)
  '(tab-width 2)
  '(version-control t))
@@ -77,7 +84,6 @@
 (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
 (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
 (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
 (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
 
 (define-key haskell-cabal-mode-map (kbd "C-`") 'haskell-interactive-bring)

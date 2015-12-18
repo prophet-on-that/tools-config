@@ -29,6 +29,8 @@ alias time="/usr/bin/time"
 # GPG_TTY=$(tty)
 # export GPG_TTY
 export GIT="git@github.com:prophet-on-that"
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
 
 if [[ -f "$HOME/.bashrc_private" ]]; then
   . "$HOME/.bashrc_private"
