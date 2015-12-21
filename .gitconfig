@@ -2,7 +2,7 @@
 	name = Alex Bates
 	email = ard.bates@otastech.com
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /home/alex.bates/.gitignore
 	pager = less
 [color]
 	ui = auto

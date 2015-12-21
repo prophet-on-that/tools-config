@@ -7,7 +7,7 @@
 
 (require 'cl)
 (defvar packages-list
-  '(color-theme-modern theme-looper highlight-indentation helm projectile helm-projectile haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git projectile helm-projectile haskell-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -84,7 +84,10 @@
 (global-set-key (kbd "C-h a") 'helm-apropos)
 (global-set-key (kbd "C-c s") 'helm-occur)
 (global-set-key (kbd "C-c b") 'helm-projectile)
-(define-key global-map (kbd "C-c g") 'helm-projectile-grep)
+(define-key global-map (kbd "C-c g")
+  (lambda ()
+    (interactive)
+    (helm-grep-do-git-grep t)))
 (define-key global-map (kbd "C-x b") 'helm-buffers-list)
 (define-key global-map [remap jump-to-register] 'helm-register)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
@@ -94,25 +97,16 @@
 (global-set-key (kbd "C-c c") 'projectile-compile-project)
 
 ;; Haskell mode
-;; (defun haskell-set-indentation-offset ()
-;;   (interactive)
-;;   (highlight-indentation-set-offset 2))
 (add-hook 'haskell-mode-hook 'highlight-indentation-mode)
-(add-hook 'haskell-mode-hook
-          (lambda ()
-             (highlight-indentation-set-offset 2)))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook
-          (lambda ()
-            (set (make-local-variable 'compile-command) "stack build")))
-(add-hook 'haskell-cabal-mode-hook
-          (lambda ()
-            (set (make-local-variable 'compile-command) "stack build")))
 (add-hook 'haskell-mode-hook 'projectile-mode)
-(add-hook 'haskell-cabal-mode-hook 'projectile-mode)
 (add-hook 'haskell-mode-hook
           (lambda ()
+            (highlight-indentation-set-offset 2)
+            (set (make-local-variable 'compile-command) "stack build")
             (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
+(add-hook 'haskell-cabal-mode-hook 'projectile-mode)
 (add-hook 'haskell-cabal-mode-hook
           (lambda ()
+            (set (make-local-variable 'compile-command) "stack build")
             (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
