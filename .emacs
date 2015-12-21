@@ -7,7 +7,7 @@
 
 (require 'cl)
 (defvar packages-list
-  '(flx-ido ido projectile haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(helm helm-ls-git haskell-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -33,13 +33,7 @@
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(browse-url-browser-function (quote eww-browse-url))
  '(delete-old-versions t)
- '(flx-ido-mode t)
  '(haskell-process-suggest-remove-import-lines t)
- '(ido-buffer-disable-smart-matches nil)
- '(ido-enable-flex-matching t)
- '(ido-everywhere t)
- '(ido-mode (quote both) nil (ido))
- '(ido-use-faces nil)
  '(indent-tabs-mode nil)
  '(js-curly-indent-offset 2)
  '(js-enabled-frameworks (quote (javascript)))
@@ -59,34 +53,36 @@
 
 (global-set-key (kbd "C-c r") 'replace-regexp)
 (global-set-key (kbd "C-c R") 'replace-string)
+(global-set-key (kbd "C-c c") 'compile)
 
 ;; Text mode specifics
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Projectile mode
-(global-set-key (kbd "C-c P") 'projectile-mode)
-(add-hook 'prog-mode-hook 'projectile-mode)
+;; Helm configuration
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-c f") 'helm-recentf)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c <SPC>") 'helm-all-mark-rings)
+(global-set-key (kbd "C-h r") 'helm-info-emacs)
+(global-set-key (kbd "C-h i") 'helm-info-at-point)
+(global-set-key (kbd "C-h a") 'helm-apropos)
+(global-set-key (kbd "C-c s") 'helm-occur)
+(global-set-key (kbd "C-c b") 'helm-browse-project)
+(define-key global-map (kbd "C-c g") 'helm-grep-do-git-grep)
+(define-key global-map (kbd "C-x b") 'helm-buffers-list)
+(define-key global-map [remap jump-to-register] 'helm-register)
+(define-key global-map [remap list-buffers] 'helm-buffers-list)
+(define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
+(define-key global-map [remap find-tag] 'helm-etags-select)
+(define-key global-map [remap xref-find-definitions] 'helm-etags-select)
 
 ;; Haskell mode
-(add-hook 'haskell-cabal-mode-hook 'projectile-mode) 
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
-(define-key haskell-mode-map (kbd "C-c h l") 'haskell-process-load-or-reload)
-(define-key haskell-mode-map (kbd "C-c h c") 'haskell-process-cabal-build)
-(define-key haskell-mode-map (kbd "C-c h s") 'haskell-interactive-bring)
-(define-key haskell-mode-map (kbd "C-c h d") 'haskell-mode-jump-to-def)
-(define-key haskell-mode-map (kbd "C-c h k") 'haskell-interactive-mode-clear)
-(define-key haskell-mode-map (kbd "C-c h i") 'haskell-navigate-imports)
-(define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
-(define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
-(define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
-(define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-(define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
-
-(define-key haskell-cabal-mode-map (kbd "C-`") 'haskell-interactive-bring)
-(define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-(define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command) "stack build")))
+(add-hook 'haskell-cabal-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command) "stack build")))
