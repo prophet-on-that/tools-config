@@ -7,7 +7,7 @@
 
 (require 'cl)
 (defvar packages-list
-  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(color-theme-modern theme-looper highlight-indentation helm projectile helm-projectile haskell-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -63,7 +63,6 @@
 
 (global-set-key (kbd "C-c r") 'replace-regexp)
 (global-set-key (kbd "C-c R") 'replace-string)
-(global-set-key (kbd "C-c c") 'compile)
 
 ;; Appearance
 (menu-bar-mode -99) ;; Disable menu bar
@@ -73,7 +72,7 @@
 ;; Text mode specifics
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Helm configuration
+;; Helm and Projectile configuration
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -84,21 +83,24 @@
 (global-set-key (kbd "C-h i") 'helm-info-at-point)
 (global-set-key (kbd "C-h a") 'helm-apropos)
 (global-set-key (kbd "C-c s") 'helm-occur)
-(global-set-key (kbd "C-c b") 'helm-browse-project)
-(define-key global-map (kbd "C-c g") 'helm-grep-do-git-grep)
+(global-set-key (kbd "C-c b") 'helm-projectile)
+(define-key global-map (kbd "C-c g") 'helm-projectile-grep)
 (define-key global-map (kbd "C-x b") 'helm-buffers-list)
 (define-key global-map [remap jump-to-register] 'helm-register)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
 (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
 (define-key global-map [remap find-tag] 'helm-etags-select)
 (define-key global-map [remap xref-find-definitions] 'helm-etags-select)
+(global-set-key (kbd "C-c c") 'projectile-compile-project)
 
 ;; Haskell mode
-(defun haskell-set-indentation-offset ()
-  (interactive)
-  (highlight-indentation-set-offset 2))
+;; (defun haskell-set-indentation-offset ()
+;;   (interactive)
+;;   (highlight-indentation-set-offset 2))
 (add-hook 'haskell-mode-hook 'highlight-indentation-mode)
-(add-hook 'haskell-mode-hook 'haskell-set-indentation-offset)
+(add-hook 'haskell-mode-hook
+          (lambda ()
+             (highlight-indentation-set-offset 2)))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook
           (lambda ()
@@ -106,3 +108,11 @@
 (add-hook 'haskell-cabal-mode-hook
           (lambda ()
             (set (make-local-variable 'compile-command) "stack build")))
+(add-hook 'haskell-mode-hook 'projectile-mode)
+(add-hook 'haskell-cabal-mode-hook 'projectile-mode)
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
+(add-hook 'haskell-cabal-mode-hook
+          (lambda ()
+            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
