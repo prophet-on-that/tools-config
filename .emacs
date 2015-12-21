@@ -7,7 +7,7 @@
 
 (require 'cl)
 (defvar packages-list
-  '(helm helm-ls-git haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git haskell-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -29,11 +29,21 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(backup-by-copying t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(browse-url-browser-function (quote eww-browse-url))
+ '(custom-safe-themes
+   (quote
+    ("fd7ef8af44dd5f240e4e65b8a4eecbc37a07c7896d729a75ba036a59f82cfa58" "fc89666d6de5e1d75e6fe4210bd20be560a68982da7f352bd19c1033fb7583ba" "31772cd378fd8267d6427cec2d02d599eee14a1b60e9b2b894dd5487bd30978e" default)))
  '(delete-old-versions t)
  '(haskell-process-suggest-remove-import-lines t)
+ '(helm-boring-buffer-regexp-list
+   (quote
+    ("\\` " "\\*helm" "\\*helm-mode" "\\*Echo Area" "\\*Minibuf" "\\*Messages" "\\*GNU Emacs" "\\*scratch" "\\*Completions")))
  '(indent-tabs-mode nil)
  '(js-curly-indent-offset 2)
  '(js-enabled-frameworks (quote (javascript)))
@@ -54,6 +64,11 @@
 (global-set-key (kbd "C-c r") 'replace-regexp)
 (global-set-key (kbd "C-c R") 'replace-string)
 (global-set-key (kbd "C-c c") 'compile)
+
+;; Appearance
+(menu-bar-mode -99) ;; Disable menu bar
+(load-theme 'hober t)
+(global-set-key (kbd "C-c n") 'theme-looper-enable-next-theme)
 
 ;; Text mode specifics
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -79,6 +94,11 @@
 (define-key global-map [remap xref-find-definitions] 'helm-etags-select)
 
 ;; Haskell mode
+(defun haskell-set-indentation-offset ()
+  (interactive)
+  (highlight-indentation-set-offset 2))
+(add-hook 'haskell-mode-hook 'highlight-indentation-mode)
+(add-hook 'haskell-mode-hook 'haskell-set-indentation-offset)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook
           (lambda ()
