@@ -1,6 +1,6 @@
 [user]
 	name = Alex Bates
-	email = ard.bates@otastech.com
+	email = alex.bates@otastech.com
 [core]
 	excludesfile = /home/alex.bates/.gitignore
 	pager = less

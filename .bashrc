@@ -19,7 +19,7 @@ alias up="cd .."
 alias less="less -R"
 alias tmux="tmux -2"
 alias emacs="emacs -nw"
-alias gitpp="git push && git push --tags"
+alias gitpp="git push --all && git push --tags"
 alias gl="git log --all --graph --abbrev-commit --pretty=oneline --decorate --color | less"
 alias utop="top -u ${USER}"
 

@@ -7,7 +7,7 @@
 
 (require 'cl)
 (defvar packages-list
-  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git projectile helm-projectile haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git projectile helm-projectile helm-dash org haskell-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -52,6 +52,12 @@
  '(js-paren-indent-offset 2)
  '(js-square-indent-offset 2)
  '(kept-new-versions 6)
+ '(org-agenda-files
+   (quote
+    ("~/org/books.org" "~/org/personal.org" "~/org/work.org")))
+ '(org-log-done (quote time))
+ '(org-startup-folded t)
+ '(org-startup-indented t)
  '(tab-width 2)
  '(version-control t))
 (custom-set-faces
@@ -67,7 +73,6 @@
 ;; Appearance
 (menu-bar-mode -99) ;; Disable menu bar
 (load-theme 'hober t)
-(global-set-key (kbd "C-c n") 'theme-looper-enable-next-theme)
 
 ;; Text mode specifics
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -96,7 +101,19 @@
 (define-key global-map [remap xref-find-definitions] 'helm-etags-select)
 (global-set-key (kbd "C-c c") 'projectile-compile-project)
 
+;; Helm-dash
+(defun activate-package-docsets (root)
+  (progn
+    (setq helm-dash-docsets-path root)
+    (setq helm-dash-common-docsets (helm-dash-installed-docsets))
+
+    (message
+     (format "activated %d docsets from: %s"
+             (length helm-dash-common-docsets) root))
+    ))
+
 ;; Haskell mode
+(require 'haskell)
 (add-hook 'haskell-mode-hook 'highlight-indentation-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'projectile-mode)
@@ -110,3 +127,35 @@
           (lambda ()
             (set (make-local-variable 'compile-command) "stack build")
             (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
+
+(defun haskell-project-documentation ()
+  "Open project-local documentation index with browse-url."
+  (interactive)
+  (browse-url (concat "file://"
+                      (concat (shell-command-to-string "/bin/bash -c 'stack path | grep local-doc-root | grep -Po '/.+' | tr -d \"\n\"'")
+                              "/index.html"))))
+(define-key haskell-mode-map (kbd "C-c d p") 'haskell-project-documentation)
+(define-key haskell-cabal-mode-map (kbd "C-c d p") 'haskell-project-documentation)
+
+(defun haskell-dependencies-documentation ()
+  "Open documentation index for project and dependencies with browse-url."
+  (interactive)
+  (browse-url (concat "file://"
+                      (concat (shell-command-to-string "/bin/bash -c 'stack path | grep local-doc-root | grep -Po '/.+' | tr -d \"\n\"'")
+                              "/all/index.html"))))
+(define-key haskell-mode-map (kbd "C-c d d") 'haskell-dependencies-documentation)
+(define-key haskell-cabal-mode-map (kbd "C-c d d") 'haskell-dependencies-documentation)
+
+(defun haskell-snapshot-documentation ()
+  "Open documentation index for snapshot with browse-url."
+  (interactive)
+  (browse-url (concat "file://"
+                      (concat (shell-command-to-string "/bin/bash -c 'stack path | grep snapshot-doc-root | grep -Po '/.+' | tr -d \"\n\"'")
+                              "/index.html"))))
+(define-key haskell-mode-map (kbd "C-c d s") 'haskell-snapshot-documentation)
+(define-key haskell-cabal-mode-map (kbd "C-c d s") 'haskell-snapshot-documentation)
+
+;; Org-mode configuration
+(require 'org)
+(define-key global-map (kbd "C-c a") 'org-agenda)
+(put 'dired-find-alternate-file 'disabled nil)
