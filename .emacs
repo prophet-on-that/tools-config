@@ -157,5 +157,13 @@
 
 ;; Org-mode configuration
 (require 'org)
-(define-key global-map (kbd "C-c a") 'org-agenda)
+; (define-key global-map (kbd "C-c a") 'org-agenda)
 (put 'dired-find-alternate-file 'disabled nil)
+
+(defun helm-source-org-agendas ()
+  (interactive)
+  (helm :sources (helm-build-sync-source "Org Agendas"
+                 :candidates 'org-agenda-files
+                 :action 'find-file)
+      :buffer "*helm org agendas"))
+(define-key global-map (kbd "C-c a") 'helm-source-org-agendas)
