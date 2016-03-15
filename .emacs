@@ -36,6 +36,7 @@
  '(backup-by-copying t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(browse-url-browser-function (quote eww-browse-url))
+ '(compilation-scroll-output (quote first-error))
  '(custom-safe-themes
    (quote
     ("fd7ef8af44dd5f240e4e65b8a4eecbc37a07c7896d729a75ba036a59f82cfa58" "fc89666d6de5e1d75e6fe4210bd20be560a68982da7f352bd19c1033fb7583ba" "31772cd378fd8267d6427cec2d02d599eee14a1b60e9b2b894dd5487bd30978e" default)))
@@ -58,6 +59,7 @@
  '(org-log-done (quote time))
  '(org-startup-folded t)
  '(org-startup-indented t)
+ '(projectile-use-git-grep t)
  '(tab-width 2)
  '(version-control t))
 (custom-set-faces
@@ -89,10 +91,7 @@
 (global-set-key (kbd "C-h a") 'helm-apropos)
 (global-set-key (kbd "C-c s") 'helm-occur)
 (global-set-key (kbd "C-c b") 'helm-projectile)
-(define-key global-map (kbd "C-c g")
-  (lambda ()
-    (interactive)
-    (helm-grep-do-git-grep t)))
+(define-key global-map (kbd "C-c g") 'helm-projectile-grep)
 (define-key global-map (kbd "C-x b") 'helm-buffers-list)
 (define-key global-map [remap jump-to-register] 'helm-register)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
@@ -120,13 +119,13 @@
 (add-hook 'haskell-mode-hook
           (lambda ()
             (highlight-indentation-set-offset 2)
-            (set (make-local-variable 'compile-command) "stack build")
-            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
+            (set (make-local-variable 'compile-command) "stack build --test --no-run-tests")
+            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build --test --no-run-tests")))
 (add-hook 'haskell-cabal-mode-hook 'projectile-mode)
 (add-hook 'haskell-cabal-mode-hook
           (lambda ()
-            (set (make-local-variable 'compile-command) "stack build")
-            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build")))
+            (set (make-local-variable 'compile-command) "stack build --test --no-run-tests")
+            (set (make-local-variable 'projectile-project-compilation-cmd) "stack build --test --no-run-tests")))
 
 (defun haskell-project-documentation ()
   "Open project-local documentation index with browse-url."
@@ -154,6 +153,9 @@
                               "/index.html"))))
 (define-key haskell-mode-map (kbd "C-c d s") 'haskell-snapshot-documentation)
 (define-key haskell-cabal-mode-map (kbd "C-c d s") 'haskell-snapshot-documentation)
+
+(define-key haskell-mode-map (kbd "C-c t") (lambda () (interactive) (async-shell-command "stack test")))
+(define-key haskell-cabal-mode-map (kbd "C-c t") (lambda () (interactive) (async-shell-command "stack test")))
 
 ;; Org-mode configuration
 (require 'org)
