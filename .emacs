@@ -1,13 +1,13 @@
 (require 'package)
-(package-initialize)
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(package-initialize)
 
 (require 'cl)
 (defvar packages-list
-  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git projectile helm-projectile helm-dash org haskell-mode) ;; ADD REQUIRED PACKAGES HERE
+  '(color-theme-modern theme-looper highlight-indentation helm helm-ls-git projectile helm-projectile helm-dash org haskell-mode markdown-mode) ;; ADD REQUIRED PACKAGES HERE
   "Packages required on launch")
 
 (defun has-package-not-installed ()
@@ -53,6 +53,7 @@
  '(js-paren-indent-offset 2)
  '(js-square-indent-offset 2)
  '(kept-new-versions 6)
+ '(markdown-command "pandoc -f markdown -t html")
  '(org-agenda-files
    (quote
     ("~/org/books.org" "~/org/personal.org" "~/org/work.org")))
@@ -169,3 +170,12 @@
                  :action 'find-file)
       :buffer "*helm org agendas"))
 (define-key global-map (kbd "C-c a") 'helm-source-org-agendas)
+
+;; Markdown configuration
+(require 'markdown-mode)
+(define-key markdown-mode-map (kbd "C-c m p") 'markdown-preview)
+(define-key markdown-mode-map (kbd "C-c m h 1") 'markdown-insert-header-atx-1)
+(define-key markdown-mode-map (kbd "C-c m h 2") 'markdown-insert-header-atx-2)
+(define-key markdown-mode-map (kbd "C-c m l") 'markdown-insert-link)
+(define-key markdown-mode-map (kbd "C-c m i") 'markdown-insert-italic)
+(define-key markdown-mode-map (kbd "C-c m b") 'markdown-insert-bold)
