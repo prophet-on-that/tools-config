@@ -179,3 +179,6 @@
 (define-key markdown-mode-map (kbd "C-c m l") 'markdown-insert-link)
 (define-key markdown-mode-map (kbd "C-c m i") 'markdown-insert-italic)
 (define-key markdown-mode-map (kbd "C-c m b") 'markdown-insert-bold)
+
+;; HTML-mode
+(add-hook 'html-mode-hook (lambda () (auto-fill-mode -1)))
