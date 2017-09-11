@@ -12,15 +12,14 @@ Windows versions.
    following, this home directory is assumed to be
    `C:\Users\prophet-on-that`.
    ``` 
-   @echo off set
-   home=C:\Users\prophet-on-that start "" "c:\Program
-   Files\emacs-25.2-x86_64\bin\runemacs.exe" 
+   @echo off
+   set home=C:\Users\prophet-on-that 
+   start "" "c:\Program Files\emacs-25.2-x86_64\bin\runemacs.exe" 
    ```
 4. Create a shortcut to `runemacs.cmd`, and, using the *properties*
    dialog, set its *start in* folder to be as above. To prevent the
    command prompt flashing before Emacs is shown, additionally set it
    to start minimised.
-5. Add this shortcut to the Windows start menu,
-   `C:\ProgramData\Microsoft\Windows\Start Menu\Programs` to make it
-   searchable. This folder is hidden: it may be necessary to enable
-   showing it in Windows Explorer.
+5. Add this shortcut to the Windows start menu for your user
+   (`%AppData%\Microsoft\Windows\Start Menu\Programs`) to make
+   it searchable.
